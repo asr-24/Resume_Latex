@@ -214,6 +214,8 @@
 \newcommand*{\entrydatestyle}[1]{{\fontsize{8pt}{1em}\bodyfontlight\color{graytext} #1}}%\slshape
 \newcommand*{\entrylocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
 \newcommand*{\descriptionstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{text} #1}}
+\newcommand*{\customorganizationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\color{text} #1}}
+
 
 % For elements of subentry
 \newcommand*{\subentrytitlestyle}[1]{{\fontsize{8pt}{1em}\bodyfont\mdseries\color{graytext} #1}}
@@ -614,6 +616,25 @@
         \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}}}
   \end{tabular*}%  
 }
+
+
+\newcommand*{\customcventry}[5]{%
+  \vspace{-3.5mm}  
+  \setlength\tabcolsep{0pt}
+  \setlength{\extrarowheight}{0pt}
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 3.2cm} R{3.2cm}}
+    \ifempty{#1#3#4}
+      {\entrytitlestyle{#5}\setlength{\leftmargin}{-20em} \noindent\\
+        \multicolumn{1}{L{\textwidth}}{\customorganizationstyle{#2}}} % Use customorganizationstyle here
+      {\ifempty{#2#3}
+          {\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
+          {\entrytitlestyle{#2} & \entrylocationstyle{#3} \\
+            \entrypositionstyle{#1} & \entrydatestyle{#4} \\}
+        \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}}}
+  \end{tabular*}%  
+}
+
+% \newcommand{\customorganizationstyle}[1]{\fontsize{10}{12}\selectfont #1}
 
 % Define an environment for cvsubentry
 \newenvironment{cvsubentries}{%
